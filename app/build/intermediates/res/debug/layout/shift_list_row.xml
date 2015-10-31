@@ -1,0 +1,42 @@
+<!--
+Layout for a row of the Shift List Table
+  -->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content" android:orientation="vertical"
+    android:layout_width="fill_parent">
+
+    <TableRow android:layout_width="fill_parent"
+        android:id="@+id/TableRow01"
+        android:layout_height="wrap_content">
+
+        <TextView android:textColor="#ff000000"
+            android:id="@+id/id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="id"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:height="40sp" />
+
+        <TextView android:textColor="#ff000000"
+            android:id="@+id/startTime"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="categoryId"
+            android:layout_weight="1"
+            android:height="40sp" />
+
+        <TextView android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ff000000"
+            android:id="@+id/endTime"
+            android:text="description"
+            android:height="40sp" />
+
+    </TableRow>
+
+    </TableLayout><!-- From: file:/home/silkyoak/android-projects/shiftshare/app/src/main/res/layout/shift_list_row.xml -->

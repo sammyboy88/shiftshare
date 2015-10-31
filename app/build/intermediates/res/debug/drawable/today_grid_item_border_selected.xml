@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid
+        android:color="@color/list_select"
+        />
+    <stroke
+        android:width="0.5px"
+        android:color="@color/list_divider"
+        />
+</shape><!-- From: file:/home/silkyoak/android-projects/shiftshare/app/src/main/res/drawable/today_grid_item_border_selected.xml -->

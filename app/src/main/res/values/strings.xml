@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">calshare</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">Month</string>
+    <string name="title_section2">Week</string>
+    <string name="title_section3">Day</string>
+    <string name="shift_edit">Edit</string>
+    <string name="shift_delete">Delete</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+</resources>

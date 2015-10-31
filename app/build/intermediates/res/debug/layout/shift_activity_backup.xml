@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+
+    <LinearLayout android:id="@+id/shiftHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:orientation="horizontal">
+
+        <TextView android:textColor="#ff000000"
+            android:id="@+id/headerName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Shift"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:height="40sp"
+            android:fontFamily="sans-serif-condensed"
+            android:focusableInTouchMode="true" />
+
+        <TextView android:textColor="#ff000000"
+            android:id="@+id/headerStart"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Start"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:height="40sp"
+            android:fontFamily="sans-serif-condensed" />
+
+        <TextView android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ff000000"
+            android:id="@+id/headerEnd"
+            android:text="End"
+            android:textStyle="bold"
+            android:height="40sp"
+            android:fontFamily="sans-serif-condensed" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/shiftHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+            <com.example.calshare.view.ShiftListView
+                android:id="@+id/shiftListView"
+                android:choiceMode="multipleChoice"
+                android:layout_width="match_parent"
+                android:listSelector="@drawable/shift_list_background"
+                android:scrollbars="vertical"
+                android:layout_height="376dp" >
+            </com.example.calshare.view.ShiftListView>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/addshiftbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="22dp"
+        android:layout_marginLeft="55dp"
+        android:onClick="addShift"
+        android:text="Add" />
+
+</RelativeLayout><!-- From: file:/home/silkyoak/android-projects/shiftshare/app/src/main/res/layout/shift_activity_backup.xml -->

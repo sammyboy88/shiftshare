@@ -1,0 +1,93 @@
+<!--
+The header for the Month Grid
+  -->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content" android:orientation="vertical"
+    android:layout_width="fill_parent">
+
+    <TableRow android:layout_width="fill_parent"
+        android:id="@+id/month_day_of_week_tablerow"
+        android:layout_height="wrap_content">
+
+        <TextView android:textColor="#ff000000"
+            android:id="@+id/month_header_sunday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Sun"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:height="40sp"
+            android:fontFamily="sans-serif-condensed"
+            android:focusableInTouchMode="true" />
+
+        <TextView android:textColor="#ff000000"
+            android:id="@+id/month_header_monday"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Mon"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:height="40sp"
+            android:fontFamily="sans-serif-condensed" />
+
+        <TextView android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ff000000"
+            android:id="@+id/month_header_tuesday"
+            android:text="Tue"
+            android:textStyle="bold"
+            android:height="40sp"
+            android:fontFamily="sans-serif-condensed" />
+
+        <TextView android:layout_height="wrap_content"
+              android:layout_width="fill_parent"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:textColor="#ff000000"
+              android:id="@+id/month_header_wednesday"
+              android:text="Wed"
+              android:textStyle="bold"
+              android:height="40sp"
+              android:fontFamily="sans-serif-condensed" />
+
+        <TextView android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:textColor="#ff000000"
+                  android:id="@+id/month_header_thursday"
+                  android:text="Thu"
+                  android:textStyle="bold"
+                  android:height="40sp"
+                  android:fontFamily="sans-serif-condensed" />
+
+        <TextView android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:textColor="#ff000000"
+                  android:id="@+id/month_header_friday"
+                  android:text="Fri"
+                  android:textStyle="bold"
+                  android:height="40sp"
+                  android:fontFamily="sans-serif-condensed" />
+
+
+        <TextView android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:textColor="#ff000000"
+                  android:id="@+id/month_header_saturday"
+                  android:text="Sat"
+                  android:textStyle="bold"
+                  android:height="40sp"
+                  android:fontFamily="sans-serif-condensed" />
+
+    </TableRow>
+
+    </TableLayout>

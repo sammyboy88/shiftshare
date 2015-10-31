@@ -1,0 +1,14 @@
+
+
+
+
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:textColor="#ff000000"
+            android:id="@+id/testListRowText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="id"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:height="40sp" />
