@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.calshare.adapter.CalendarPagerAdapter;
 import com.example.calshare.adapter.CircularViewPagerHandler;
+import com.example.calshare.db.DateShiftDatabaseManager;
 
 public class CalendarActivity extends FragmentActivity {
 
@@ -19,6 +20,9 @@ public class CalendarActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
 
+        // initialise the DateShiftDbManager
+        DateShiftDatabaseManager.initialise(this);
+
         viewPager = (ViewPager) findViewById(R.id.calendarViewPager);
         calendarPagerAdapter = new CalendarPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(calendarPagerAdapter);
@@ -26,7 +30,7 @@ public class CalendarActivity extends FragmentActivity {
         final CircularViewPagerHandler circularViewPagerHandler = new CircularViewPagerHandler(viewPager);
         //circularViewPagerHandler.setOnPageChangeListener(createOnPageChangeListener());
         viewPager.setOnPageChangeListener(circularViewPagerHandler);
-	}
+    }
 
     public void refreshFragments() {
         Log.i("CalendarActivity", "refreshFragments");

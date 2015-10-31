@@ -1,6 +1,7 @@
 package com.example.calshare.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,8 +14,17 @@ import com.example.calshare.WeekFragment;
 import com.example.calshare.WeekGridAdapter;
 import com.example.calshare.YearFragment;
 import com.example.calshare.YearGridAdapter;
+import com.example.calshare.db.DateShiftDatabaseManager;
+import com.example.calshare.model.DateShiftLink;
+import com.j256.ormlite.dao.Dao;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created on 18/08/15.
@@ -23,15 +33,16 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
 
     private Context mContext;
 
-    private YearGridAdapter yearGridAdapter;
-    private MonthGridAdapter monthGridAdapter;
-    private WeekGridAdapter weekGridAdapter;
+//    private YearGridAdapter yearGridAdapter;
+//    private MonthGridAdapter monthGridAdapter;
+//    private WeekGridAdapter weekGridAdapter;
 
     private Fragment[] fragments = new Fragment[5];
 
     public CalendarPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
+
         fragments[0] = YearFragment.instantiate(mContext, YearFragment.class.getName());
         fragments[1] = WeekFragment.instantiate(mContext, WeekFragment.class.getName());
         fragments[2] = MonthFragment.instantiate(mContext, MonthFragment.class.getName());
@@ -63,9 +74,8 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
      * @return
      */
     public void refreshFragments() {
-        ((WeekFragment)fragments[1]).reload();
-        ((MonthFragment)fragments[2]).reload();
-        ((WeekFragment)fragments[4]).reload();
+        LocalDate todayLocalDate = null;
+        new ReloadDateShiftsTask().execute(todayLocalDate);
     }
 
     @Override
@@ -92,6 +102,24 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
                 return week;
             default:
                 return "";
+        }
+    }
+
+    private class ReloadDateShiftsTask extends AsyncTask<LocalDate, Void, Void> {
+
+        @Override
+        protected Void doInBackground(LocalDate... params) {
+            DateShiftDatabaseManager.getInstance().loadFromDb();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Log.i("MonthFragment", "onPostExecute, results " );
+
+            ((WeekFragment)fragments[1]).refreshAdapter();
+            ((MonthFragment)fragments[2]).refreshAdapter();
+            ((WeekFragment)fragments[4]).refreshAdapter();
         }
     }
 }

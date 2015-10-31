@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.example.calshare.db.CalshareDatabaseHelper;
+import com.example.calshare.db.DateShiftDatabaseManager;
 import com.example.calshare.model.DateShiftLink;
 import com.example.calshare.view.DateTextView;
 import com.j256.ormlite.dao.Dao;
@@ -38,7 +39,7 @@ public class MonthFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
+        Log.i("MonthFragment", "onCreateView");
         mDbHelper = new CalshareDatabaseHelper(getActivity());
 
         View v = inflater.inflate(R.layout.month_layout, container, false);
@@ -81,7 +82,8 @@ public class MonthFragment extends Fragment {
         LocalDate todayLocalDate = new LocalDate(new DateTime());
         localDates = getLocalDates(todayLocalDate);
 
-        monthGridAdapter = new MonthGridAdapter(MonthFragment.this.getActivity(), null, localDates);
+        monthGridAdapter = new MonthGridAdapter(MonthFragment.this.getActivity(),
+                DateShiftDatabaseManager.getInstance().getMonthDateToShiftMap(), localDates);
         monthGridView.setAdapter(monthGridAdapter);
 
         return v;
@@ -93,16 +95,15 @@ public class MonthFragment extends Fragment {
         super.onStart();
         // load DateShiftLinks
         Log.i("MonthFragment", "onStart");
-        reload();
+
     }
 
-    /**
-     * Invoked by CalendarActivity
-     */
-    public void reload() {
-        LocalDate todayLocalDate = new LocalDate(new DateTime());
-        localDates = getLocalDates(todayLocalDate);
-        new ReadDateShiftLinksTask().execute(localDates);
+
+    // invoked by CalendarPagerAdapter
+    public void refreshAdapter() {
+        monthGridAdapter.refreshAdapter(DateShiftDatabaseManager.getInstance().getMonthDateToShiftMap());
+        Log.i("MonthFragment", "refreshAdapter");
+        monthGridView.invalidateViews();
     }
 
 

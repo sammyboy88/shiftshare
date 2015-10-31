@@ -2,6 +2,8 @@ package com.example.calshare.application;
 
 import android.app.Application;
 
+import com.example.calshare.db.DateShiftDatabaseManager;
+
 import net.danlew.android.joda.JodaTimeAndroid;
 
 /**

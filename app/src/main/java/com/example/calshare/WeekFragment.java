@@ -1,6 +1,5 @@
 package com.example.calshare;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -12,16 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 
 import com.example.calshare.db.CalshareDatabaseHelper;
+import com.example.calshare.db.DateShiftDatabaseManager;
 import com.example.calshare.model.DateShiftLink;
 import com.example.calshare.view.DateTextView;
 import com.j256.ormlite.dao.Dao;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import org.joda.time.YearMonth;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -46,6 +44,7 @@ public class WeekFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
+        Log.i("WeekFragment", "onCreateView");
         mDbHelper = new CalshareDatabaseHelper(getActivity());
         View v = inflater.inflate(R.layout.week_layout_new, container, false);
         weekGridview = (GridView) v.findViewById(R.id.weekGridView);
@@ -54,7 +53,8 @@ public class WeekFragment extends Fragment {
         LocalDate todayLocalDate = new LocalDate(new DateTime());
         localDates = getLocalDates(todayLocalDate);
 
-        weekGridAdapter = new WeekGridAdapterNew(WeekFragment.this.getActivity(), null, localDates);
+        weekGridAdapter = new WeekGridAdapterNew(WeekFragment.this.getActivity(),
+                DateShiftDatabaseManager.getInstance().getWeekDateToShiftMap(), localDates);
         weekGridview.setAdapter(weekGridAdapter);
 
         weekGridview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -86,6 +86,7 @@ public class WeekFragment extends Fragment {
                 return false;
             }
         });
+
         return v;
     }
 
@@ -93,11 +94,14 @@ public class WeekFragment extends Fragment {
     public void onStart() {
         Log.i("WeekFragment", "onStart");
         super.onStart();
-        reload();
     }
 
-    public void reload() {
-        new ReadDateShiftLinksTask().execute(localDates);
+
+    // invoked by CalendarPagerAdapter
+    public void refreshAdapter() {
+        weekGridAdapter.refreshAdapter(DateShiftDatabaseManager.getInstance().getWeekDateToShiftMap());
+        Log.i("WeekFragment", "refreshAdapter");
+        weekGridview.invalidateViews();
     }
 
     private LocalDate[] getLocalDates(LocalDate currentWeekDate) {
@@ -118,6 +122,7 @@ public class WeekFragment extends Fragment {
         return localDates;
     }
 
+    // Should only be required when shift assignment is changed in the shift selection dialog
     private class ReadDateShiftLinksTask extends AsyncTask<LocalDate, Void, List<DateShiftLink>> {
 
         @Override
