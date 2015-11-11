@@ -98,7 +98,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_below="@id/month_dayofweek_Header"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <GridView
@@ -109,8 +109,16 @@
         android:stretchMode="columnWidth"
         android:horizontalSpacing="0dp"
         android:verticalSpacing="0dp"
+
         android:numColumns="7" >
     </GridView>
+
+    <TextView
+        android:id="@+id/shiftDetailTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        android:gravity="center"/>
 
 </LinearLayout>
 </RelativeLayout><!-- From: file:/home/silkyoak/android-projects/shiftshare/app/src/main/res/layout/month_layout.xml -->

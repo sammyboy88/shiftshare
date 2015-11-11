@@ -11,4 +11,6 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <item type="integer" name="month_header_height">30</item>
+
 </resources>

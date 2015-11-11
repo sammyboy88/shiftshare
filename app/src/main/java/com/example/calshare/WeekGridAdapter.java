@@ -2,9 +2,6 @@ package com.example.calshare;
 
 import android.app.Activity;
 import android.database.DataSetObserver;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,36 +9,37 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import org.joda.time.DateTime;
+import com.example.calshare.model.Shift;
+import com.example.calshare.view.DateTextView;
+
 import org.joda.time.LocalDate;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.calshare.R.layout.shift_list_row;
-
 public class WeekGridAdapter implements ListAdapter {
 
 	private String[] days = {"Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat" };
 	private Activity context;
-    private Map<String, String> dateToShiftMap = new HashMap<String, String>();
+    private Map<String, Shift> dateToShiftMap = new HashMap<String, Shift>();
     private LocalDate[] localDates;
     private LocalDate todayDate;
 
-//	public WeekGridAdapter(Activity ctx) {
-//		context = ctx;
-//	}
 
-    public WeekGridAdapter(Activity ctx, Map<String, String> results, LocalDate[] localDates) {
+    public WeekGridAdapter(Activity ctx, Map<String, Shift> results, LocalDate[] localDates) {
         context = ctx;
         dateToShiftMap = results;
         this.localDates = localDates;
         todayDate = new LocalDate();
     }
 
-    public synchronized void refreshAdapter(Map<String, String> newDateToShiftMap) {
+    public synchronized void refreshAdapter(Map<String, Shift> newDateToShiftMap) {
         dateToShiftMap = newDateToShiftMap;
     }
+
+	public synchronized void updateLocalDates(LocalDate[] localDates) {
+		this.localDates = localDates;
+	}
 	
 	@Override
 	public int getCount() {
@@ -70,7 +68,8 @@ public class WeekGridAdapter implements ListAdapter {
 		LayoutInflater vi;
 		vi = LayoutInflater.from(context);
 		LinearLayout linearLayout = (LinearLayout)vi.inflate(R.layout.week_grid_cell, null);
-		TextView textView = (TextView)linearLayout.getChildAt(0);
+		DateTextView dateTextView = (DateTextView)linearLayout.getChildAt(0);
+		TextView shiftNameTextView = (TextView) linearLayout.getChildAt(1);
 
 		// set minimum height to the height of the tab content area divided by number of rows
 		//DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -92,8 +91,26 @@ public class WeekGridAdapter implements ListAdapter {
         }
 		LocalDate currentPositionDate = localDates[position];
 		CharSequence dayText = days[position] + " " + currentPositionDate.toString("dd/MM/YYYY");
-		textView.setText(dayText);
+		dateTextView.setText(dayText);
 
+		if (dateToShiftMap != null) {
+			Shift shiftObj = dateToShiftMap.get(localDates[position].toString("YYYYMMdd"));
+			if (shiftObj != null) {
+				String shiftDescription = shiftObj.toString();
+				shiftNameTextView.setText(shiftDescription);
+
+			}
+		}
+		dateTextView.setLocalDate(localDates[position]); // used by ItemLongClick in the WeekFragment
+
+		// set the selected date
+        // set the background of the currently select view
+        CalendarActivity calendarActivity = (CalendarActivity) context;
+        if (calendarActivity.getSelectedDate() != null && calendarActivity.getSelectedDate().equals(currentPositionDate)) {
+            // select and back up drawable
+            calendarActivity.setSelectedBackgroundDrawable(linearLayout.getBackground());
+            linearLayout.setBackgroundResource(R.drawable.normal_grid_item_border_selected);
+        }
 
 		return linearLayout;
 	}

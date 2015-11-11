@@ -51,7 +51,6 @@ public class ShiftSelectorDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View dialogView = getActivity().getLayoutInflater().inflate(R.layout.shift_list_dialog, null);
-
         builder.setView(dialogView);
 
         mShiftListView = (ListView) dialogView.findViewById(R.id.shiftListView);
@@ -85,6 +84,7 @@ public class ShiftSelectorDialogFragment extends DialogFragment {
             ((CalendarActivity)activity).refreshFragments();
         }
     }
+
 
     /**
      * When a shift in the list is clicked, associate the date with the shift
@@ -148,11 +148,6 @@ public class ShiftSelectorDialogFragment extends DialogFragment {
                 }
             }
 
-            // close the dialog
-//            Dialog dialog = ShiftSelectorDialogFragment.this.getDialog();
-//            if (dialog != null) {
-//                dialog.cancel();
-//            }
             ShiftSelectorDialogFragment.this.dismiss();
 
         }

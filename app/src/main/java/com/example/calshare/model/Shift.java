@@ -41,4 +41,8 @@ public class Shift {
     public void setEndtime(String endtime) {
         this.endtime = endtime;
     }
+
+    public String toString() {
+        return getTitle() + "\t(" + getStarttime() + " - " + getEndtime() + ")";
+    }
 }

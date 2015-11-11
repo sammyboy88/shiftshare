@@ -9,11 +9,14 @@
     <color name="list_divider">#ff111111</color>
     <color name="list_select">#ff18b5b4</color>
     <color name="orange">#ffe4a924</color>
-    <color name="red">#ffb63013</color>
+    <color name="red">#de959a</color>
     <!-- From: file:/home/silkyoak/android-projects/shiftshare/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/home/silkyoak/android-projects/shiftshare/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <item name="month_header_height" type="integer">30</item>
     <!-- From: file:/home/silkyoak/android-projects/shiftshare/app/build/intermediates/exploded-aar/net.danlew/android.joda/2.8.2/res/values/values.xml -->
     <eat-comment/>
     <plurals name="joda_time_android_abbrev_in_num_days">

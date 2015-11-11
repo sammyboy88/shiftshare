@@ -53,19 +53,7 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Log.i("CalendarPageAdapter", "position=" + position);
-//        if(position == 0 || position == 3) {
-//            Log.i("CalendarPagerAdapter", "getItem 0||3 position=" + position);
-//            return YearFragment.instantiate(mContext, YearFragment.class.getName());
-//        } else if(position == 4 || position == 1) {
-//            Log.i("CalendarPagerAdapter", "getItem 4||1 position=" + position);
-//            currentWeekFragment = (WeekFragment)WeekFragment.instantiate(mContext, WeekFragment.class.getName());
-//            return currentWeekFragment;
-//        } else {
-//            Log.i("CalendarPagerAdapter", "getItem position=" + position);
-//            // need to retain the monthFragment reference to update it after the select shift dialog is closed
-//            currentMonthFragment = (MonthFragment)MonthFragment.instantiate(mContext, MonthFragment.class.getName());
-//            return currentMonthFragment;
-//        }
+
         return fragments[position];
     }
 
@@ -76,6 +64,21 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
     public void refreshFragments() {
         LocalDate todayLocalDate = null;
         new ReloadDateShiftsTask().execute(todayLocalDate);
+    }
+
+
+    public void invalidateOtherFragments(final Fragment currentFragment) {
+        new Thread(new Runnable() {
+            public void run() {
+                if (currentFragment instanceof MonthFragment) {
+                    ((WeekFragment) fragments[1]).invalidateViews();
+                }
+                else if (currentFragment instanceof WeekFragment) {
+                    ((MonthFragment) fragments[2]).invalidateViews();
+                }
+            }
+        }).start();
+
     }
 
     @Override
@@ -105,6 +108,7 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
         }
     }
 
+
     private class ReloadDateShiftsTask extends AsyncTask<LocalDate, Void, Void> {
 
         @Override
@@ -121,5 +125,6 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
             ((MonthFragment)fragments[2]).refreshAdapter();
             ((WeekFragment)fragments[4]).refreshAdapter();
         }
+
     }
 }

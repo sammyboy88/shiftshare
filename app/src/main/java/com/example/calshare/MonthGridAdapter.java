@@ -31,10 +31,10 @@ public class MonthGridAdapter extends BaseAdapter implements ListAdapter {
 
 	private Activity context;
     private LocalDate todayDate;
-    private Map<String, String> dateToShiftMap = new HashMap<String, String>();
+    private Map<String, Shift> dateToShiftMap = new HashMap<String, Shift>();
     private LocalDate[] localDates;
 
-	public MonthGridAdapter(Activity ctx, Map<String, String> results, LocalDate[] localDates) {
+	public MonthGridAdapter(Activity ctx, Map<String, Shift> results, LocalDate[] localDates) {
 		context = ctx;
         dateToShiftMap = results;
         this.localDates = localDates;
@@ -42,7 +42,7 @@ public class MonthGridAdapter extends BaseAdapter implements ListAdapter {
 
 	}
 
-    public synchronized void refreshAdapter(Map<String, String> newDateToShiftMap) {
+    public synchronized void refreshAdapter(Map<String, Shift> newDateToShiftMap) {
         dateToShiftMap = newDateToShiftMap;
     }
 
@@ -81,29 +81,39 @@ public class MonthGridAdapter extends BaseAdapter implements ListAdapter {
         int viewPagerHeight = viewPager.getHeight();
         int monthDayOfWeekHeaderHeight = monthDayOfWeekHeader.getHeight();
 
-        linearLayout.setMinimumHeight((viewPagerHeight - (pagerTitleStripHeight + monthDayOfWeekHeaderHeight)) / 6);
+        linearLayout.setMinimumHeight((viewPagerHeight - (pagerTitleStripHeight + monthDayOfWeekHeaderHeight)) / 7);
 
         // configure the view depending on if the date is in the current month or if the date is today
         int todayDayOfMonth = todayDate.getDayOfMonth();
+        LocalDate currentPositionDate = localDates[position];
 
-        if (localDates[position] != null) {
+        if (currentPositionDate != null) {
 
             // if the cell is for today
-            if (todayDate.equals(localDates[position])) {
+            if (todayDate.equals(currentPositionDate)) {
                 linearLayout.setBackgroundResource(R.drawable.today_grid_item_selector);
             }
             // the cell is for a day that's not in the current month
-            else if (todayDate.getMonthOfYear() != localDates[position].getMonthOfYear()) {
+            else if (todayDate.getMonthOfYear() != currentPositionDate.getMonthOfYear()) {
                 linearLayout.setBackgroundResource(R.drawable.excluded_grid_item_selector);
             }
         }
-        dateTextView.setText(Integer.toString(localDates[position].getDayOfMonth()));
-        dateTextView.setLocalDate(localDates[position]);
+        dateTextView.setText(Integer.toString(currentPositionDate.getDayOfMonth()));
+        dateTextView.setLocalDate(currentPositionDate);
+
+        // set the selected date
+        // set the background of the currently select view
+        CalendarActivity calendarActivity = (CalendarActivity) context;
+        if (calendarActivity.getSelectedDate() != null && calendarActivity.getSelectedDate().equals(currentPositionDate)) {
+            // select and back up drawable
+            calendarActivity.setSelectedBackgroundDrawable(linearLayout.getBackground());
+            linearLayout.setBackgroundResource(R.drawable.normal_grid_item_border_selected);
+        }
 
         if (dateToShiftMap != null) {
-            String shiftName = dateToShiftMap.get(localDates[position].toString("YYYYMMdd"));
-            if (shiftName != null) {
-                shiftNameTextView.setText(shiftName);
+            Shift shiftObj = dateToShiftMap.get(currentPositionDate.toString("YYYYMMdd"));
+            if (shiftObj != null) {
+                shiftNameTextView.setText(shiftObj.getTitle());
             }
         }
 

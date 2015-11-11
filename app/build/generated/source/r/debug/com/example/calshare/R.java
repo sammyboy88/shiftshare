@@ -40,60 +40,65 @@ public final class R {
         public static final int week_grid_background=0x7f02000c;
     }
     public static final class id {
-        public static final int TableRow01=0x7f0b0026;
-        public static final int action_settings=0x7f0b0034;
-        public static final int addShiftNameEditText=0x7f0b0021;
-        public static final int addshiftbutton=0x7f0b0018;
-        public static final int calendarViewPager=0x7f0b0003;
-        public static final int cancelButton=0x7f0b0020;
-        public static final int content_frame=0x7f0b0001;
-        public static final int day=0x7f0b0007;
-        public static final int drawer_layout=0x7f0b0000;
-        public static final int endTime=0x7f0b0029;
-        public static final int endTimeButton=0x7f0b0025;
-        public static final int endTimeEditText=0x7f0b0024;
-        public static final int headerEnd=0x7f0b001c;
-        public static final int headerName=0x7f0b001a;
-        public static final int headerStart=0x7f0b001b;
-        public static final int id=0x7f0b0027;
-        public static final int left_drawer=0x7f0b0002;
-        public static final int linearLayout1=0x7f0b0030;
-        public static final int month=0x7f0b0009;
-        public static final int monthGridView=0x7f0b0015;
-        public static final int monthTextView=0x7f0b0012;
-        public static final int month_day_of_week_tablerow=0x7f0b000a;
-        public static final int month_dayofweek_Header=0x7f0b0014;
-        public static final int month_header_friday=0x7f0b0010;
-        public static final int month_header_monday=0x7f0b000c;
-        public static final int month_header_saturday=0x7f0b0011;
-        public static final int month_header_sunday=0x7f0b000b;
-        public static final int month_header_thursday=0x7f0b000f;
-        public static final int month_header_tuesday=0x7f0b000d;
-        public static final int month_header_wednesday=0x7f0b000e;
-        public static final int name=0x7f0b001e;
-        public static final int openbutton=0x7f0b002c;
-        public static final int pager_title_strip=0x7f0b0004;
-        public static final int saveButton=0x7f0b001f;
-        public static final int shiftHeader=0x7f0b0019;
-        public static final int shiftListView=0x7f0b001d;
-        public static final int shiftNameTextView=0x7f0b0013;
-        public static final int shift_delete=0x7f0b0035;
-        public static final int shift_list_header_main=0x7f0b0016;
-        public static final int shift_list_layout_main=0x7f0b0017;
-        public static final int smoothbutton=0x7f0b002b;
-        public static final int startTime=0x7f0b0028;
-        public static final int startTimeButton=0x7f0b0023;
-        public static final int startTimeEditText=0x7f0b0022;
-        public static final int testListRowText=0x7f0b002d;
-        public static final int testListView=0x7f0b002a;
-        public static final int text=0x7f0b0005;
-        public static final int text1=0x7f0b0006;
-        public static final int week=0x7f0b0008;
-        public static final int weekGridView=0x7f0b002f;
-        public static final int weekTextView=0x7f0b002e;
-        public static final int yearGridView=0x7f0b0033;
-        public static final int yearTab=0x7f0b0032;
-        public static final int yearTextView=0x7f0b0031;
+        public static final int TableRow01=0x7f0c0028;
+        public static final int action_settings=0x7f0c0036;
+        public static final int addShiftNameEditText=0x7f0c0022;
+        public static final int add_shift_button=0x7f0c0027;
+        public static final int addshiftbutton=0x7f0c0019;
+        public static final int calendarViewPager=0x7f0c0003;
+        public static final int cancelButton=0x7f0c0021;
+        public static final int content_frame=0x7f0c0001;
+        public static final int day=0x7f0c0007;
+        public static final int drawer_layout=0x7f0c0000;
+        public static final int endTime=0x7f0c002b;
+        public static final int endTimeButton=0x7f0c0026;
+        public static final int endTimeEditText=0x7f0c0025;
+        public static final int headerEnd=0x7f0c001d;
+        public static final int headerName=0x7f0c001b;
+        public static final int headerStart=0x7f0c001c;
+        public static final int id=0x7f0c0029;
+        public static final int left_drawer=0x7f0c0002;
+        public static final int linearLayout1=0x7f0c0032;
+        public static final int month=0x7f0c0009;
+        public static final int monthGridView=0x7f0c0015;
+        public static final int monthTextView=0x7f0c0012;
+        public static final int month_day_of_week_tablerow=0x7f0c000a;
+        public static final int month_dayofweek_Header=0x7f0c0014;
+        public static final int month_header_friday=0x7f0c0010;
+        public static final int month_header_monday=0x7f0c000c;
+        public static final int month_header_saturday=0x7f0c0011;
+        public static final int month_header_sunday=0x7f0c000b;
+        public static final int month_header_thursday=0x7f0c000f;
+        public static final int month_header_tuesday=0x7f0c000d;
+        public static final int month_header_wednesday=0x7f0c000e;
+        public static final int name=0x7f0c001f;
+        public static final int openbutton=0x7f0c002e;
+        public static final int pager_title_strip=0x7f0c0004;
+        public static final int saveButton=0x7f0c0020;
+        public static final int shiftDetailTextView=0x7f0c0016;
+        public static final int shiftHeader=0x7f0c001a;
+        public static final int shiftListView=0x7f0c001e;
+        public static final int shiftNameTextView=0x7f0c0013;
+        public static final int shift_delete=0x7f0c0037;
+        public static final int shift_list_header_main=0x7f0c0017;
+        public static final int shift_list_layout_main=0x7f0c0018;
+        public static final int smoothbutton=0x7f0c002d;
+        public static final int startTime=0x7f0c002a;
+        public static final int startTimeButton=0x7f0c0024;
+        public static final int startTimeEditText=0x7f0c0023;
+        public static final int testListRowText=0x7f0c002f;
+        public static final int testListView=0x7f0c002c;
+        public static final int text=0x7f0c0005;
+        public static final int text1=0x7f0c0006;
+        public static final int week=0x7f0c0008;
+        public static final int weekGridView=0x7f0c0031;
+        public static final int weekTextView=0x7f0c0030;
+        public static final int yearGridView=0x7f0c0035;
+        public static final int yearTab=0x7f0c0034;
+        public static final int yearTextView=0x7f0c0033;
+    }
+    public static final class integer {
+        public static final int month_header_height=0x7f070000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -121,29 +126,29 @@ public final class R {
         public static final int year_layout=0x7f030016;
     }
     public static final class menu {
-        public static final int main=0x7f0a0000;
-        public static final int shift_cab=0x7f0a0001;
+        public static final int main=0x7f0b0000;
+        public static final int shift_cab=0x7f0b0001;
     }
     public static final class plurals {
-        public static final int joda_time_android_abbrev_in_num_days=0x7f070000;
-        public static final int joda_time_android_abbrev_in_num_hours=0x7f070001;
-        public static final int joda_time_android_abbrev_in_num_minutes=0x7f070002;
-        public static final int joda_time_android_abbrev_in_num_seconds=0x7f070003;
-        public static final int joda_time_android_abbrev_num_days_ago=0x7f070004;
-        public static final int joda_time_android_abbrev_num_hours_ago=0x7f070005;
-        public static final int joda_time_android_abbrev_num_minutes_ago=0x7f070006;
-        public static final int joda_time_android_abbrev_num_seconds_ago=0x7f070007;
-        public static final int joda_time_android_duration_hours=0x7f070008;
-        public static final int joda_time_android_duration_minutes=0x7f070009;
-        public static final int joda_time_android_duration_seconds=0x7f07000a;
-        public static final int joda_time_android_in_num_days=0x7f07000b;
-        public static final int joda_time_android_in_num_hours=0x7f07000c;
-        public static final int joda_time_android_in_num_minutes=0x7f07000d;
-        public static final int joda_time_android_in_num_seconds=0x7f07000e;
-        public static final int joda_time_android_num_days_ago=0x7f07000f;
-        public static final int joda_time_android_num_hours_ago=0x7f070010;
-        public static final int joda_time_android_num_minutes_ago=0x7f070011;
-        public static final int joda_time_android_num_seconds_ago=0x7f070012;
+        public static final int joda_time_android_abbrev_in_num_days=0x7f080000;
+        public static final int joda_time_android_abbrev_in_num_hours=0x7f080001;
+        public static final int joda_time_android_abbrev_in_num_minutes=0x7f080002;
+        public static final int joda_time_android_abbrev_in_num_seconds=0x7f080003;
+        public static final int joda_time_android_abbrev_num_days_ago=0x7f080004;
+        public static final int joda_time_android_abbrev_num_hours_ago=0x7f080005;
+        public static final int joda_time_android_abbrev_num_minutes_ago=0x7f080006;
+        public static final int joda_time_android_abbrev_num_seconds_ago=0x7f080007;
+        public static final int joda_time_android_duration_hours=0x7f080008;
+        public static final int joda_time_android_duration_minutes=0x7f080009;
+        public static final int joda_time_android_duration_seconds=0x7f08000a;
+        public static final int joda_time_android_in_num_days=0x7f08000b;
+        public static final int joda_time_android_in_num_hours=0x7f08000c;
+        public static final int joda_time_android_in_num_minutes=0x7f08000d;
+        public static final int joda_time_android_in_num_seconds=0x7f08000e;
+        public static final int joda_time_android_num_days_ago=0x7f08000f;
+        public static final int joda_time_android_num_hours_ago=0x7f080010;
+        public static final int joda_time_android_num_minutes_ago=0x7f080011;
+        public static final int joda_time_android_num_seconds_ago=0x7f080012;
     }
     public static final class raw {
         public static final int joda_time_android_tzdata_africa_abidjan=0x7f040000;
@@ -623,19 +628,19 @@ public final class R {
         public static final int joda_time_android_tzdata_zoneinfomap=0x7f0401da;
     }
     public static final class string {
-        public static final int action_settings=0x7f080000;
-        public static final int app_name=0x7f080001;
-        public static final int drawer_close=0x7f080002;
-        public static final int drawer_open=0x7f080003;
-        public static final int joda_time_android_date_time=0x7f080004;
-        public static final int joda_time_android_preposition_for_date=0x7f080005;
-        public static final int joda_time_android_preposition_for_time=0x7f080006;
-        public static final int joda_time_android_relative_time=0x7f080007;
-        public static final int shift_delete=0x7f080008;
-        public static final int shift_edit=0x7f080009;
-        public static final int title_section1=0x7f08000a;
-        public static final int title_section2=0x7f08000b;
-        public static final int title_section3=0x7f08000c;
+        public static final int action_settings=0x7f090000;
+        public static final int app_name=0x7f090001;
+        public static final int drawer_close=0x7f090002;
+        public static final int drawer_open=0x7f090003;
+        public static final int joda_time_android_date_time=0x7f090004;
+        public static final int joda_time_android_preposition_for_date=0x7f090005;
+        public static final int joda_time_android_preposition_for_time=0x7f090006;
+        public static final int joda_time_android_relative_time=0x7f090007;
+        public static final int shift_delete=0x7f090008;
+        public static final int shift_edit=0x7f090009;
+        public static final int title_section1=0x7f09000a;
+        public static final int title_section2=0x7f09000b;
+        public static final int title_section3=0x7f09000c;
     }
     public static final class style {
         /** 
@@ -646,9 +651,9 @@ public final class R {
  API 11 theme customizations can go here. 
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppBaseTheme=0x7f0a0000;
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f090001;
+        public static final int AppTheme=0x7f0a0001;
     }
 }
