@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="2.8.2"><source path="/home/silkyoak/android-projects/shiftshare/app/build/intermediates/exploded-aar/net.danlew/android.joda/2.8.2/assets"/></dataSet><dataSet config="main"><source path="/home/silkyoak/android-projects/shiftshare/app/src/main/assets"/></dataSet><dataSet config="debug"><source path="/home/silkyoak/android-projects/shiftshare/app/src/debug/assets"/></dataSet></merger>
