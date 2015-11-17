@@ -2,7 +2,7 @@
 <!--
 Layout for a cell of the Week Grid
   -->
-<LinearLayout
+<com.example.calshare.view.DateLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -26,6 +26,6 @@ Layout for a cell of the Week Grid
         android:layout_weight="1"
         android:gravity="center"/>
 
-</LinearLayout>
+</com.example.calshare.view.DateLinearLayout>
 
 

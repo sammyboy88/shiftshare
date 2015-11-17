@@ -4,27 +4,17 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 import com.example.calshare.MonthFragment;
-import com.example.calshare.MonthGridAdapter;
 import com.example.calshare.WeekFragment;
-import com.example.calshare.WeekGridAdapter;
 import com.example.calshare.YearFragment;
-import com.example.calshare.YearGridAdapter;
 import com.example.calshare.db.DateShiftDatabaseManager;
-import com.example.calshare.model.DateShiftLink;
-import com.j256.ormlite.dao.Dao;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.joda.time.YearMonth;
 
 /**
  * Created on 18/08/15.
@@ -32,11 +22,6 @@ import java.util.Map;
 public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
 
     private Context mContext;
-
-//    private YearGridAdapter yearGridAdapter;
-//    private MonthGridAdapter monthGridAdapter;
-//    private WeekGridAdapter weekGridAdapter;
-
     private Fragment[] fragments = new Fragment[5];
 
     public CalendarPagerAdapter(Context context, FragmentManager fm) {
@@ -81,6 +66,10 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
+    public void switchToMonth(YearMonth yearMonth) {
+        ((MonthFragment)fragments[2]).switchToMonth(yearMonth);
+    }
+
     @Override
     public int getCount() {
         return 5;
@@ -90,7 +79,6 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         DateTime todayDateTime = new DateTime();
         CharSequence year = todayDateTime.toString("yyyy");
-        CharSequence month = todayDateTime.toString("MMM");
         CharSequence week = "Week " + todayDateTime.getWeekOfWeekyear();
         switch (position) {
             case 0 :
@@ -98,6 +86,7 @@ public class CalendarPagerAdapter extends FragmentStatePagerAdapter {
             case 1 :
                 return week;
             case 2 :
+                CharSequence month = ((MonthFragment) fragments[2]).getYearMonth().toString("MMM");
                 return month;
             case 3:
                 return year;

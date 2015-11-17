@@ -1,6 +1,5 @@
 package com.example.calshare;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import com.example.calshare.db.CalshareDatabaseHelper;
 import com.example.calshare.db.DateShiftDatabaseManager;
 import com.example.calshare.model.Shift;
+import com.example.calshare.view.DateLinearLayout;
 import com.example.calshare.view.DateTextView;
 
 import org.joda.time.DateTime;
@@ -30,8 +30,6 @@ public class MonthFragment extends Fragment {
     private MonthGridAdapter monthGridAdapter;
     private GridView monthGridView;
     private TextView shiftDetailTextView;
-    private final static int GRID_SIZE = 42;
-    private LocalDate[] localDates;
 
 //    private LocalDate previouslyLongClickedDate;
 
@@ -105,38 +103,40 @@ public class MonthFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // get the day
-                LinearLayout linearLayout = (LinearLayout)view;
+                DateLinearLayout linearLayout = (DateLinearLayout)view;
                 DateTextView dateTextView = (DateTextView)linearLayout.getChildAt(0);
 
                 if (shiftDetailTextView != null) {
-                    //Log.i("MonthFragment", "shiftDetailTextView height " + shiftDetailTextView.getHeight());
                     updateShiftDetailTextView(dateTextView.getLocalDate());
                 }
 
                 // set the background of the currently select view and reset the background of the previously selected view
                 CalendarActivity calendarActivity = (CalendarActivity)getActivity();
+                Log.i("MonthFragment", "previously selected Date " + calendarActivity.getSelectedDate());
                 if (calendarActivity.getSelectedDate() != null) {
-                    // deselect previously selected
+                    // restore previously selected date
                     LinearLayout previouslySelectedView = getLayoutFromDate(adapterView, calendarActivity.getSelectedDate());
+                    Log.i("MonthFragment", "previously selected view " + previouslySelectedView);
+
                     if (previouslySelectedView != null) {
-                        previouslySelectedView.setBackgroundDrawable(calendarActivity.getSelectedBackgroundDrawable());
+                        monthGridAdapter.setBackground(previouslySelectedView, calendarActivity.getSelectedDate());
                     }
                 }
 
                 // select
                 calendarActivity.setSelectedDate(dateTextView.getLocalDate());
-                calendarActivity.setSelectedBackgroundDrawable(linearLayout.getBackground());
+                //calendarActivity.setSelectedBackgroundResid(linearLayout.getBackgroundResource());
+                Log.i("MonthFragment", "setBackgroundDrawable " + linearLayout.getBackground());
                 linearLayout.setBackgroundResource(R.drawable.normal_grid_item_border_selected);
 
                 calendarActivity.invalidateOtherFragments(MonthFragment.this);
             }
         });
 
-        LocalDate todayLocalDate = new LocalDate(new DateTime());
-        localDates = getLocalDates(todayLocalDate);
+        YearMonth todayYearMonth = new YearMonth(new DateTime());
 
         monthGridAdapter = new MonthGridAdapter(MonthFragment.this.getActivity(),
-                DateShiftDatabaseManager.getInstance().getMonthDateToShiftMap(), localDates);
+                DateShiftDatabaseManager.getInstance().getMonthDateToShiftMap(), todayYearMonth);
         monthGridView.setAdapter(monthGridAdapter);
 
         return v;
@@ -149,6 +149,7 @@ public class MonthFragment extends Fragment {
             LinearLayout linearLayout = (LinearLayout)adapterView.getChildAt(i);
             DateTextView dateTextView = (DateTextView)linearLayout.getChildAt(0);
             if (localDate.equals(dateTextView.getLocalDate())) {
+                Log.i("MonthFragment", "getLayoutFromDate " + localDate);
                 return linearLayout;
             }
 
@@ -174,7 +175,7 @@ public class MonthFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.i("MonthFragment", "onStart");
+        //Log.i("MonthFragment", "onStart");
         CalendarActivity calendarActivity = (CalendarActivity)getActivity();
         if (calendarActivity.getSelectedDate() != null) {
             updateShiftDetailTextView(calendarActivity.getSelectedDate());
@@ -186,7 +187,7 @@ public class MonthFragment extends Fragment {
     public void refreshAdapter() {
         if (monthGridAdapter != null) {
             monthGridAdapter.refreshAdapter(DateShiftDatabaseManager.getInstance().getMonthDateToShiftMap());
-            Log.i("MonthFragment", "refreshAdapter");
+            //Log.i("MonthFragment", "refreshAdapter");
             monthGridView.invalidateViews();
         }
         CalendarActivity calendarActivity = (CalendarActivity)getActivity();
@@ -199,7 +200,6 @@ public class MonthFragment extends Fragment {
     // invokes post() because called in worker thread
     public void invalidateViews() {
         if (monthGridView != null) {
-            Log.i("MonthFragment", "invalidating MonthFragment " + this);
             monthGridView.post(new Runnable() {
                 public void run() {
                     monthGridView.invalidateViews();
@@ -212,29 +212,22 @@ public class MonthFragment extends Fragment {
         }
     }
 
-
-    private LocalDate[] getLocalDates(LocalDate currentMonthDate) {
-        // set up the day numbers
-        int todayDayOfMonth = currentMonthDate.getDayOfMonth();
-        int daysInMonth = currentMonthDate.dayOfMonth().getMaximumValue();
-        LocalDate firstDayOfMonthDate = currentMonthDate.minusDays(todayDayOfMonth - 1);
-        int firstDayOfMonthDayOfWeek = firstDayOfMonthDate.getDayOfWeek() % 7;
-
-        // get the number of days in the previous month
-        LocalDate lastDayOfPreviousMonth = currentMonthDate.minusDays(todayDayOfMonth);
-        // get date to start from in previous month
-        LocalDate startDateInPreviousMonth = lastDayOfPreviousMonth.minusDays(firstDayOfMonthDayOfWeek - 1);
-        int startDateInPreviousMonthDayOfMonth = startDateInPreviousMonth.getDayOfMonth();
-
-        LocalDate[] localDates = new LocalDate[GRID_SIZE];
-        LocalDate dateOfMonth = startDateInPreviousMonth;
-        for (int i = 0; i < GRID_SIZE ; i++) {
-            localDates[i] = dateOfMonth;
-            dateOfMonth = dateOfMonth.plusDays(1);
+    // invoked when user clicks on a month square in the YearView
+    public void switchToMonth(YearMonth yearMonth) {
+        if (monthGridAdapter != null && monthGridView != null) {
+            monthGridAdapter.setYearMonth(yearMonth);
+            monthGridView.invalidateViews();
         }
-        return localDates;
     }
 
+    public YearMonth getYearMonth() {
+        if (monthGridAdapter != null) {
+            return monthGridAdapter.getYearMonth();
+        }
+        else {
+            return new YearMonth(new DateTime());
+        }
+    }
 
 
 }

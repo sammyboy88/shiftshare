@@ -10,6 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.calshare.model.Shift;
+import com.example.calshare.view.DateLinearLayout;
 import com.example.calshare.view.DateTextView;
 
 import org.joda.time.LocalDate;
@@ -67,7 +68,7 @@ public class WeekGridAdapter implements ListAdapter {
 
 		LayoutInflater vi;
 		vi = LayoutInflater.from(context);
-		LinearLayout linearLayout = (LinearLayout)vi.inflate(R.layout.week_grid_cell, null);
+		DateLinearLayout linearLayout = (DateLinearLayout)vi.inflate(R.layout.week_grid_cell, null);
 		DateTextView dateTextView = (DateTextView)linearLayout.getChildAt(0);
 		TextView shiftNameTextView = (TextView) linearLayout.getChildAt(1);
 
@@ -85,11 +86,9 @@ public class WeekGridAdapter implements ListAdapter {
 		//System.out.println("tabContent height: " + tabContentHeight);
 		linearLayout.setMinimumHeight((viewPagerHeight - pagerTitleStripHeight) / 7);
 
-
-        if (todayDate.equals(localDates[position])) {
-            linearLayout.setBackgroundResource(R.drawable.today_grid_item_selector);
-        }
 		LocalDate currentPositionDate = localDates[position];
+		setBackground(linearLayout, currentPositionDate);
+
 		CharSequence dayText = days[position] + " " + currentPositionDate.toString("dd/MM/YYYY");
 		dateTextView.setText(dayText);
 
@@ -108,11 +107,20 @@ public class WeekGridAdapter implements ListAdapter {
         CalendarActivity calendarActivity = (CalendarActivity) context;
         if (calendarActivity.getSelectedDate() != null && calendarActivity.getSelectedDate().equals(currentPositionDate)) {
             // select and back up drawable
-            calendarActivity.setSelectedBackgroundDrawable(linearLayout.getBackground());
+            //calendarActivity.setSelectedBackgroundResid(linearLayout.getBackgroundResource());
             linearLayout.setBackgroundResource(R.drawable.normal_grid_item_border_selected);
         }
 
 		return linearLayout;
+	}
+
+	void setBackground(LinearLayout linearLayout, LocalDate currentPositionDate) {
+		if (todayDate.equals(currentPositionDate)) {
+			linearLayout.setBackgroundResource(R.drawable.today_grid_item_selector);
+		}
+		else {
+			linearLayout.setBackgroundResource(R.drawable.normal_grid_item_selector);
+		}
 	}
 	
 

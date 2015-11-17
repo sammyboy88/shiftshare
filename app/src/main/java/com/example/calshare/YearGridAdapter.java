@@ -11,15 +11,23 @@ import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.joda.time.LocalDateTime;
+
 public class YearGridAdapter implements ListAdapter {
 
 	private String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 	private Activity context;
+	private int year;
 	
 	public YearGridAdapter(Activity ctx) {
 		context = ctx;
+		// default year
+		year = new LocalDateTime().getYear();
 	}
 
+	public int getYear() {
+		return this.year;
+	}
 
 	@Override
 	public int getCount() {

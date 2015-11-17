@@ -2,7 +2,7 @@
 <!--
 Layout for a cell of the Month Grid
   -->
-<LinearLayout
+<com.example.calshare.view.DateLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -27,7 +27,7 @@ Layout for a cell of the Month Grid
         android:layout_weight="1"
         android:gravity="center"/>
 
-</LinearLayout>
+</com.example.calshare.view.DateLinearLayout>
 
 
 <!-- From: file:/home/silkyoak/android-projects/shiftshare/app/src/main/res/layout/month_grid_cell.xml -->

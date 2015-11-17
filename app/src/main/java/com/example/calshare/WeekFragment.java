@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.example.calshare.db.CalshareDatabaseHelper;
 import com.example.calshare.db.DateShiftDatabaseManager;
+import com.example.calshare.view.DateLinearLayout;
 import com.example.calshare.view.DateTextView;
 
 import org.joda.time.DateTime;
@@ -87,22 +88,22 @@ public class WeekFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // get the day
-                LinearLayout linearLayout = (LinearLayout)view;
+                DateLinearLayout linearLayout = (DateLinearLayout)view;
                 DateTextView dateTextView = (DateTextView)linearLayout.getChildAt(0);
 
                 // set the background of the currently select view and reset the background of the previously selected view
                 CalendarActivity calendarActivity = (CalendarActivity)getActivity();
-                if (calendarActivity.getSelectedDate() != null) {
+                LocalDate previouslySelectedDate = calendarActivity.getSelectedDate();
+                if (previouslySelectedDate != null) {
                     // deselect previously selected
-                    LinearLayout previouslySelectedView = getLayoutFromDate(adapterView, calendarActivity.getSelectedDate());
+                    LinearLayout previouslySelectedView = getLayoutFromDate(adapterView, previouslySelectedDate);
                     if (previouslySelectedView != null) {
-                        previouslySelectedView.setBackgroundDrawable(calendarActivity.getSelectedBackgroundDrawable());
+                        weekGridAdapter.setBackground(previouslySelectedView, previouslySelectedDate);
                     }
                 }
 
                 // select
                 calendarActivity.setSelectedDate(dateTextView.getLocalDate());
-                calendarActivity.setSelectedBackgroundDrawable(linearLayout.getBackground());
                 linearLayout.setBackgroundResource(R.drawable.normal_grid_item_border_selected);
                 calendarActivity.invalidateOtherFragments(WeekFragment.this);
             }
@@ -149,7 +150,7 @@ public class WeekFragment extends Fragment {
     // called in worker thread thus invokes post() to invalidate views
     public void invalidateViews() {
         if (weekGridview != null) {
-            Log.i("WeekFragment", "invalidating WeekFragment " + this);
+            //Log.i("WeekFragment", "invalidating WeekFragment " + this);
             CalendarActivity calendarActivity = (CalendarActivity) getActivity();
             weekGridAdapter.updateLocalDates(getLocalDates(calendarActivity.getSelectedDate()));
             weekGridview.post(new Runnable() {

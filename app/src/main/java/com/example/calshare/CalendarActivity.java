@@ -14,24 +14,24 @@ import com.example.calshare.adapter.CircularViewPagerHandler;
 import com.example.calshare.db.DateShiftDatabaseManager;
 
 import org.joda.time.LocalDate;
+import org.joda.time.YearMonth;
 
 public class CalendarActivity extends FragmentActivity {
 
-	//private FragmentTabHost mTabHost;
     private CalendarPagerAdapter calendarPagerAdapter;
     private ViewPager viewPager;
 
     // to share selected date across fragments
     private LocalDate selectedDate;
-    private Drawable selectedBackgroundDrawable;
+    //private int selectedBackgroundResid;
 
-    public Drawable getSelectedBackgroundDrawable() {
-        return selectedBackgroundDrawable;
-    }
-
-    public void setSelectedBackgroundDrawable(Drawable selectedBackgroundDrawable) {
-        this.selectedBackgroundDrawable = selectedBackgroundDrawable;
-    }
+//    public int getSelectedBackgroundResid() {
+//        return this.selectedBackgroundResid;
+//    }
+//
+//    public void setSelectedBackgroundResid(int selectedBackgroundResid) {
+//        this.selectedBackgroundResid = selectedBackgroundResid;
+//    }
 
     public LocalDate getSelectedDate() {
         return selectedDate;
@@ -67,6 +67,10 @@ public class CalendarActivity extends FragmentActivity {
         calendarPagerAdapter.invalidateOtherFragments(currentFragment);
     }
 
+    public void switchToMonth(YearMonth yearMonth) {
+        calendarPagerAdapter.switchToMonth(yearMonth);
+        viewPager.setCurrentItem(2);
+    }
 
     public void addShift(View view) {
         Log.i("CalendarActivity", "addShift");
