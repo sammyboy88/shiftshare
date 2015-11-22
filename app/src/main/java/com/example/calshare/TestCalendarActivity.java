@@ -1,24 +1,22 @@
 package com.example.calshare;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.View;
 
-import com.example.calshare.adapter.CalendarPagerAdapter;
+import com.example.calshare.adapter.TestCalendarPagerAdapter;
 import com.example.calshare.adapter.CircularViewPagerHandler;
 import com.example.calshare.db.DateShiftDatabaseManager;
 
 import org.joda.time.LocalDate;
-import org.joda.time.YearMonth;
 
-public class CalendarActivity extends FragmentActivity {
+/**
+ * Created by silkyoak on 15-11-19.
+ */
+public class TestCalendarActivity extends FragmentActivity {
 
-    private CalendarPagerAdapter calendarPagerAdapter;
+    private TestCalendarPagerAdapter calendarPagerAdapter;
     private ViewPager viewPager;
 
     // to share selected date across fragments
@@ -34,7 +32,7 @@ public class CalendarActivity extends FragmentActivity {
     }
 
     @Override
-	protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
 
@@ -42,7 +40,7 @@ public class CalendarActivity extends FragmentActivity {
         DateShiftDatabaseManager.initialise(this);
 
         viewPager = (ViewPager) findViewById(R.id.calendarViewPager);
-        calendarPagerAdapter = new CalendarPagerAdapter(this, getSupportFragmentManager());
+        calendarPagerAdapter = new TestCalendarPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(calendarPagerAdapter);
 
         final CircularViewPagerHandler circularViewPagerHandler = new CircularViewPagerHandler(viewPager);
@@ -50,24 +48,8 @@ public class CalendarActivity extends FragmentActivity {
         viewPager.setOnPageChangeListener(circularViewPagerHandler);
     }
 
-    public void refreshFragments() {
-        Log.i("CalendarActivity", "refreshFragments");
-        calendarPagerAdapter.refreshFragments();
-    }
-
     public void invalidateOtherFragments(Fragment currentFragment) {
-        calendarPagerAdapter.invalidateOtherFragments(currentFragment);
-    }
-
-    public void switchToMonth(YearMonth yearMonth) {
-        calendarPagerAdapter.switchToMonth(yearMonth);
-        viewPager.setCurrentItem(2);
-    }
-
-    public void addShift(View view) {
-        Log.i("CalendarActivity", "addShift");
-        Intent intent = new Intent(this, AddShiftActivity.class);
-        startActivity(intent);
+        //calendarPagerAdapter.invalidateOtherFragments(currentFragment);
     }
 
 }

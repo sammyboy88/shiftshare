@@ -29,7 +29,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        mPlanetTitles = new String[] {"Calendar", "Shifts", "Friends", "TestList"};
+        mPlanetTitles = new String[] {"Calendar", "Shifts", "Friends", "TestCalendar"};
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -63,7 +63,7 @@ public class MainActivity extends FragmentActivity {
         getActionBar().setHomeButtonEnabled(true);
 
         // start CalendarActivity
-        Intent calendarActivityIntent = new Intent(this, CalendarActivity.class);
+        Intent calendarActivityIntent = new Intent(this, TestCalendarActivity.class);
         startActivity(calendarActivityIntent);
 
     }
@@ -101,7 +101,7 @@ public class MainActivity extends FragmentActivity {
         return true;
     }
     
-    private static Class[] activityClasses = new Class[] { CalendarActivity.class, ShiftActivity.class, FriendActivity.class, TestListActivity.class };
+    private static Class[] activityClasses = new Class[] { CalendarActivity.class, ShiftActivity.class, FriendActivity.class, TestCalendarActivity.class };
     
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
